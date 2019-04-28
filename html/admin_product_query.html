@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">
+        <img class="logo" src="img/月亮.png" alt="">
+        <h1>红月游戏交易平台</h1>
+        <hr>
+    </div>
+    <div id="content" style="margin-top: 50px">
+        请输入编号：<input type="text" id="uid">
+        <a href="#" onclick="product_list()" style="text-decoration: none;display: block;height: 30px;line-height: 30px;width: 100px;text-align: center;background-color: red;color: #fff;margin-top: 20px;">查找</a>
+        <div>
+            <table style="width: 50%">
+                <thead>
+                <tr>
+                    <th>商品编号</th>
+                    <th>商品名称</th>
+                    <th>商品价格</th>
+                    <th>商品简介</th>
+                </tr>
+                </thead>
+                <tbody id="t_product">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function product_list(){
+        //创建异步对象
+        var xhr=new XMLHttpRequest;
+        //绑定监听
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                var list=JSON.parse(result);
+                for(var i=0;i<list.length;i++){
+                    t_product.innerHTML+="<tr><td>"+list[i].pid+"</td><td>"+list[i].pname+"</td><td>"+list[i].price+"</td><td>"+list[i].ptxt+"</td></tr>"
+                }
+            }
+        }
+        //打开链接，创建请求
+        xhr.open('get','/admin/product_list',true);
+        //发送请求
+        xhr.send(null);
+    }
+</script>
+</body>
+</html>

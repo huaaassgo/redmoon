@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/user_login.css">
+    <link rel="stylesheet" href="css/public.css">
+</head>
+<body>
+<div>
+<img class="logo" src="img/月亮.png" alt="">
+<h1>红月游戏交易平台</h1>
+</div>
+<div id="wrapper">
+    <div class="content">
+        <table>
+            <thead>
+            <tr>
+                <td class="login_txt">登陆</td>
+            </tr>
+            <tr>
+                <td><hr></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>用户名：<input type="text" name="" id="uname"><span id="check_uname"></span></td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;密码：<input type="password" name="" id="upwd"><span id="check_upwd"></span></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td><a href="#" class="login" onclick="login()">登陆</a></td>
+            </tr>
+            <tr>
+                <td><a href="#" class="register">新用户注册</a></td>
+            </tr>
+            <tr>
+                <td><a href="#" class="forget">忘记密码？</a></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<div id="footer">
+        <pre><a href="#">关于我们</a>|<a href="#">合作伙伴</a>|<a href="#">合作联系</a>|<a href="#">隐私保护</a>|<a href="#">投诉建议</a>|<a
+                href="#">免责声明</a>|<a href="#">诚聘英才</a></pre>
+    <pre>Copyright © 2002-2019 redmoon.com 版权所有 <a href="#">ICP证：浙B2-20190227(浙江红月网络技术有限公司）</a><a href="#">【网络文化经营许可证】浙网文[2019]0182-085号</a></pre>
+    <pre>
+            <a href="#">亚洲中小私营企业100强</a>	<a href="#">中国电子商务诚信单位</a>  <a href="#">反盗号绿色联盟</a> <a href="#">诚信网站</a> <a
+            href="#">浙江网上市场监管局</a></pre>
+    <pre><a href="#">工信部域名备案管理系统</a> <a href="">网上交易保障中心</a> <a href="#">企业法人营业执照</a> <a href="#">浙公网安备 33071803106279号 <a
+            href="#">品牌官网</a></pre>
+</div>
+<script>
+    function login(){
+        var xhr=new XMLHttpRequest;
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                if(result=='1_0'){
+                    check_uname.innerHTML='用户名不能为空';
+                }else if(result=='2_0'){
+                    check_upwd.innerHTML='密码不能为空';
+                }else if(result==0){
+                    alert('用户名或密码错误');
+                }else if(result==1){
+                    alert('登录成功');
+                    location.href='http://127.0.0.1:3000/index.html';
+                }
+            }
+        }
+        xhr.open('post','/user/login',true);
+        var formdata='uname='+uname.value+'&upwd='+upwd.value;
+        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xhr.send(formdata);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/admin_user.css">
+</head>
+<body onload="user_list()">
+<div id="wrapper">
+    <div id="header">
+        <img class="logo" src="img/月亮.png" alt="">
+        <h1>红月游戏交易平台</h1>
+        <a href="http://127.0.0.1:3000/admin_user_add.html">添加用户</a>
+        <a href="http://127.0.0.1:3000/admin_user_query.html">查询用户</a>
+        <hr>
+    </div>
+    <div id="content">
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>用户名</th>
+                    <th>邮箱</th>
+                    <th>电话</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="t_user">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function user_list(){
+        //创建异步对象
+        var xhr=new XMLHttpRequest;
+        //绑定监听
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                var list=JSON.parse(result);
+                for(var i=0;i<list.length;i++){
+                    if(list[i].gender=='1'){
+                        list[i].gender='男';
+                    }else if(list[i].gender=='0'){
+                        list[i].gender='女';
+                    }else{
+                        list[i].gender='不详'
+                    }
+                    t_user.innerHTML+="<tr><td>"+list[i].uname+"</td><td>"+list[i].email+"</td><td>"+list[i].phone+"</td><td>"+list[i].gender+"</td><td><a href='javascript:user_delete("+list[i].uid+")'>删除</a>  <a href='user_update.html?uid="+list[i].uid+"'>修改</a></td></tr>"
+                }
+            }
+        }
+        //打开链接，创建请求
+        xhr.open('get','/admin/user_list',true);
+        //发送请求
+        xhr.send(null);
+    }
+    function user_delete(uid){
+        var msg="确定要删除吗";
+        //创建异步对象
+        //删除确认
+        if(confirm(msg)==true){
+            var xhr=new XMLHttpRequest;
+            //绑定监听
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4&&xhr.status==200){
+                    var result=xhr.responseText;
+                    if(result==1){
+                        alert('删除成功');
+                        location.href='http://127.0.0.1:3000/admin_user.html';
+                    }
+                }
+            }
+            //打开链接，创建请求
+            xhr.open('get',"/admin/user_delete?uid="+uid,true);
+            //发送请求
+            xhr.send(null);
+        }else{
+            return false;
+        }
+    }
+    // function user_add() {
+    //     var xhr=new XMLHttpRequest;
+    //     xhr.onreadystatechange=function () {
+    //         if(xhr.readyState==4&&xhr.status==200){
+    //             var result=xhr.responseText;
+    //             if(result=='1_0'){
+    //                 alert('用户名不能为空');
+    //             }else if(result=='2_0'){
+    //                 alert('密码不能为空')；
+    //             }else if(result=='1'){
+    //                 alert('添加成功');
+    //                 location.href='http://127.0.0.1:3000/admin_user.html'
+    //             }else{
+    //                 alert('添加失败');
+    //             }
+    //         }
+    //     }
+    //     xhr.open('post','/admin/user_add',true);
+    //     formdata="uname="+uname.value+"&upwd"+upwd.value;
+    //     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    //     xhr.send(formdata);
+    // }
+    // function user_query() {
+    //     var xhr=new XMLHttpRequest;
+    //     xhr.onreadystatechange=function () {
+    //         if(xhr.readyState==4&&xhr.status==200){
+    //             var result=xhr.responseText;
+    //         }
+    //     }
+    //     xhr.open('get','/admin/user_query?uid=?'+uid.value,true);
+    //     xhr.send(null);
+    // }
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+body{
+    /*background-color: rgba(0,0,0,.1);*/
+}
+#wrapper{
+    background: url("../img/bg.jpeg");
+    background-repeat: no-repeat;
+    height: 540px;
+    -webkit-background-size: 1460px;
+    background-size: 1460px;
+    /*background-position:50% 40%;*/
+    border: 0;
+}
+#wrapper::before{
+    content:'<table></table>';
+    visibility: hidden;
+}
+.logo{
+    margin-left: 20px;
+}
+h1{
+    font-size: 32px;
+    color:#ff4e20;
+    font-family: "Xingkai SC";
+    display: inline;
+}
+.content{
+    margin-top: 80px;
+    margin-left: 900px;
+    width:300px ;
+    height: 360px;
+    background: rgba(0,0,0,.4);
+    color: #fff;
+    font-size: 18px;
+    font-family: "Xingkai SC";
+}
+.content table{
+    width:100%;
+}
+.content .login_txt{
+    padding: 15px;
+    font-size: 24px;
+    font-weight: bold;
+}
+#uname,#upwd{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border:0;
+    height: 30px;
+    margin-top: 30px;
+    width: 45%;
+}
+.login,.register{
+    display: block;
+    width: 80%;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 auto;
+    text-align: center;
+    background-image:-webkit-linear-gradient(to top,#ff4e20 0%,#0aa1ed 100%);
+    background-image:-o-linear-gradient(to top,#ff4e20 0%,#0aa1ed 100%);
+    background-image:-moz-linear-gradient(to top,#ff4e20 0%,#0aa1ed 100%);
+    background-image:linear-gradient(to top,#ff4e20 0%,#0aa1ed 100%);
+    color:#fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.register:hover{
+    padding: 8px;
+    color: #faa;
+}
+.login:hover{
+    padding: 8px;
+    color: #faa;
+}
+.content .forget{
+    display: block;
+    font-size: 14px;
+    float: right;
+    margin-top:15px;
+    color: #fff;
+}
+.forget:hover{
+    color: red;
+    text-decoration: underline;
+}
+.content span{
+    color: red;
+    font-size: 12px;
+}
+#footer{
+    height: 150px;
+}
+#footer pre{
+    text-align: center;
+    margin-top: 10px;
+    color: darkgray;
+}
+#footer a:link{
+    color: darkgray;
+}
+#footer a:visited{
+    color: darkgray;
+}
+#footer a:hover{
+    color: red;
+    text-decoration: underline;
+}

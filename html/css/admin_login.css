@@ -1,0 +1,73 @@
+#header{
+    height: 108px;
+}
+
+#header .logo{
+    margin-left: 20px;
+}
+#header h1{
+    font-size: 32px;
+    color:#ff4e20;
+    font-family: "Xingkai SC";
+    display: inline;
+}
+#wrapper{
+    width: 1440px;
+    font-family: "Xingkai SC";
+}
+#content{
+    background-image: url("../img/sw.jpg");
+    background-repeat: no-repeat;
+    background-size: 1440px;
+    height: 600px;
+    color: #fff;
+}
+#content table{
+    width: 100%;
+}
+#content::before{
+    content:'';
+    display: table;
+}
+.admin_login{
+    width: 300px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 100px;
+    text-align: center;
+    background: rgba(0,0,0,.5);
+}
+.login_txt{
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px;
+}
+#aname,#apwd{
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+    border: 0;
+    margin-top: 40px;
+}
+.login{
+    display: block;
+    width: 50%;
+    height: 30px;
+    line-height: 30px;
+    margin:0 auto;
+    text-align: center;
+    background-image:-webkit-linear-gradient(to top,#ff9569 0%,#e92758 100%);
+    background-image:-o-linear-gradient(to top,#ff9569 0%,#e92758 100%);
+    background-image:-moz-linear-gradient(to top,#ff9569 0%,#e92758 100%);
+    background-image:linear-gradient(to top,#ff9569 0%,#e92758 10 0%);
+    color:#fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 50px;
+}
+.login:hover{
+    width: 60%;
+    height: 30px;
+    color: gray;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/admin_login.css">
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">
+        <img class="logo" src="img/月亮.png" alt="">
+        <h1>红月游戏交易平台</h1>
+    </div>
+    <div id="content">
+
+        <div class="admin_login">
+        <table>
+            <tr>
+                <td class="login_txt">管理员登陆</td>
+            </tr>
+            <tr>
+                <td>账号：<input type="text" id="aname"></td>
+            </tr>
+            <tr>
+                <td>密码：<input type="password" id="apwd"></td>
+            </tr>
+            <tr>
+                <td><a href="#" class="login" onclick="login()">登陆</a></td>
+            </tr>
+        </table>
+        </div>
+    </div>
+</div>
+<script>
+function login() {
+    var xhr=new XMLHttpRequest;
+    xhr.onreadystatechange=function () {
+        if(xhr.readyState==4&&xhr.status==200){
+            var result=xhr.responseText;
+            if(result=='1'){
+                location.href='http://127.0.0.1:3000/admin_manage.html';
+            }else{
+                alert('登陆失败');
+            }
+        }
+    }
+    xhr.open('post','/admin/login',true);
+    var formdata="aname="+aname.value+"&apwd="+apwd.value;
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    xhr.send(formdata);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">
+        <img class="logo" src="img/月亮.png" alt="">
+        <h1>红月游戏交易平台</h1>
+        <hr>
+    </div>
+    <div id="content" style="margin-top: 50px">
+        请输入编号：<input type="text" id="uid">
+        <a href="#" onclick="user_query()" style="text-decoration: none;display: block;height: 30px;line-height: 30px;width: 100px;text-align: center;background-color: red;color: #fff;margin-top: 20px;">查找</a>
+        <div>
+            <table style="width: 50%">
+                <thead>
+                <tr>
+                    <th>用户名</th>
+                    <th>邮箱</th>
+                    <th>电话</th>
+                    <th>性别</th>
+                </tr>
+                </thead>
+                <tbody id="t_user">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function user_query() {
+        var xhr=new XMLHttpRequest;
+        xhr.onreadystatechange=function () {
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                    var list = JSON.parse(result);
+                    for (var i = 0; i < list.length; i++) {
+                        if (list[i].gender == '1') {
+                            list[i].gender = '男';
+                        } else if (list[i].gender == '0') {
+                            list[i].gender = '女';
+                        } else {
+                            list[i].gender = '不详'
+                        }
+                        t_user.innerHTML += "<tr><td>" + list[i].uname + "</td><td>" + list[i].email + "</td><td>" + list[i].phone + "</td><td>" + list[i].gender + "</td></tr>"
+                    }
+
+            }
+        }
+        xhr.open('get','/admin/user_query2?uid='+uid.value,true);
+        xhr.send(null);
+    }
+</script>
+</body>
+</html>

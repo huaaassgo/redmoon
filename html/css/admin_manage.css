@@ -1,0 +1,27 @@
+#wrapper{
+    width: 1440px;
+}
+a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.user,.product{
+    margin:30px 50px;
+    width: 550px;
+    height: 500px;
+    float: left;
+    background-image:linear-gradient(to top,#ff9569 0%,#e92758 100%);
+    color: #fff;
+    font-size: 64px;
+    line-height: 500px;
+    font-weight: bolder;
+    text-align: center;
+    border-radius: 10px;
+}
+.product:hover{
+    transform: scale(1.1);
+}
+.user:hover{
+    transform: scale(1.1);
+}

@@ -1,0 +1,18 @@
+#footer{
+    height: 150px;
+}
+#footer pre{
+    text-align: center;
+    margin-top: 10px;
+    color: darkgray;
+}
+#footer a:link{
+    color: darkgray;
+}
+#footer a:visited{
+    color: darkgray;
+}
+#footer a:hover{
+    color: red;
+    text-decoration: underline;
+}

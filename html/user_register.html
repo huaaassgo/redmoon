@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" href="css/user_register.css">
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">
+        <img class="logo" src="img/月亮.png" alt="">
+        <h1>红月游戏交易平台</h1>
+        <hr>
+    </div>
+    <div id="content">
+        <div id="content_login">
+        <table>
+            <tr>
+                <td class="login_txt">用户注册</td>
+            </tr>
+            <tr>
+                <td>用户名称：<input type="text" name="" id="uname" onblur="register_uname()"><span id="unameMsg"></span></td>
+            </tr>
+            <tr>
+                <td>用户密码：<input type="password" name="" id="upwd1" onblur="check_upwd()"><span id="upwd1Msg"></td>
+            </tr>
+            <tr>
+                <td>确认密码：<input type="password" name="" id="upwd2" onblur="check_upwd()"><span id="upwd2Msg"></span></td>
+            </tr>
+            <tr>
+                <td>用户邮箱：<input type="text" name="" id="email" onblur="check_email()"><span id="emailMsg"></span></td>
+            </tr>
+            <tr>
+                <td>手机号码：<input type="text" name="" id="phone" onblur="check_phone()"><span id="phoneMsg"></span></td>
+            </tr>
+            <tr>
+                <td><a href="#" class="register" onclick="register()">立即注册</a></td>
+            </tr>
+            <tr>
+                <td><a href="http://127.0.0.1:3000/user_login.html" class="login">已有账号？点击登录</a></td>
+            </tr>
+        </table>
+        </div>
+    </div>
+    <hr>
+    <div id="footer">
+        <pre><a href="#">关于我们</a>|<a href="#">合作伙伴</a>|<a href="#">合作联系</a>|<a href="#">隐私保护</a>|<a href="#">投诉建议</a>|<a
+                href="#">免责声明</a>|<a href="#">诚聘英才</a></pre>
+        <pre>Copyright © 2002-2019 redmoon.com 版权所有 <a href="#">ICP证：浙B2-20190227(浙江红月网络技术有限公司）</a><a href="#">【网络文化经营许可证】浙网文[2019]0182-085号</a></pre>
+        <pre>
+            <a href="#">亚洲中小私营企业100强</a>	<a href="#">中国电子商务诚信单位</a>  <a href="#">反盗号绿色联盟</a> <a href="#">诚信网站</a> <a
+                href="#">浙江网上市场监管局</a></pre>
+        <pre><a href="#">工信部域名备案管理系统</a> <a href="">网上交易保障中心</a> <a href="#">企业法人营业执照</a> <a href="#">浙公网安备 33071803106279号 <a
+                href="#">品牌官网</a></pre>
+    </div>
+</div>
+<script>
+    //isregisterUname,isregisterUpwd,isregisterEmail,isregisterPhone
+    function register_uname(){
+        isregisterUname=false;
+        //创建异步对象
+        var xhr=new XMLHttpRequest;
+        //绑定监听
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                if(result==1){
+                    unameMsg.innerHTML='用户名已存在';
+                }else if(result==0){
+                    unameMsg.innerHTML='用户名可以使用';
+                    isregisterUname=true;
+                }else if(result==2){
+                    unameMsg.innerHTML='用户名不能为空';
+                }
+            }
+        }
+        //打开链接，创建请求
+        xhr.open('post','/user/register_uname',true);
+        //发送请求
+        var formdata='uname='+uname.value;
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        xhr.send(formdata);
+    }
+    function check_upwd(){
+        isregisterUpwd=false;
+        var xhr=new XMLHttpRequest;
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                if(result=='1_0'){
+                    upwd1Msg.innerHTML='密码不能为空';
+                }else if(result=='2_0'){
+                    upwd2Msg.innerHTML='确认密码不能为空';
+                }else if(result=='3'){
+                    upwd2Msg.innerHTML='两次密码不同';
+                    upwd1Msg.innerHTML='';
+                }else if(result=='1'){
+                    upwd2Msg.innerHTML='ok';
+                    upwd1Msg.innerHTML='ok';
+                    isregisterUpwd=true;
+                }
+            }
+        }
+        xhr.open('post','/user/register_upwd',true);
+        var formdata='upwd1='+upwd1.value+'&upwd2='+upwd2.value;
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        xhr.send(formdata);
+
+    }
+    function check_email(){
+        isregisterEmail=false;
+        var xhr=new XMLHttpRequest;
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                if(result==0){
+                    emailMsg.innerHTML='邮箱不能为空';
+                }else if(result==-1){
+                    emailMsg.innerHTML='请输入正确的邮箱格式'
+                }else{
+                    emailMsg.innerHTML='ok';
+                    isregisterEmail=true;
+                }
+            }
+        }
+        xhr.open('get','/user/register_email?email='+email.value,true);
+        xhr.send(null);
+
+    }
+    function check_phone(){
+        isregisterPhone=false;
+        var xhr=new XMLHttpRequest;
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                if(result==0){
+                    phoneMsg.innerHTML='手机号不能为空';
+                }else if(result==2){
+                    phoneMsg.innerHTML='请输入正确的手机号';
+                }else if(result==1){
+                    phoneMsg.innerHTML='ok';
+                    isregisterPhone=true;
+                }
+            }
+        }
+        xhr.open('get','/user/register_phone?phone='+phone.value,true);
+        xhr.send(null);
+    }
+    function register(){
+        if(isregisterUname==false||isregisterUpwd==false||isregisterEmail==false||isregisterPhone==false){
+            return alert('注册失败');
+        }
+        var xhr=new XMLHttpRequest;
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                if(result==1){
+                    alert('注册成功');
+                    location.href='http://127.0.0.1:3000/index.html';
+                }else{
+                    alert('注册失败');
+                }
+            }
+        }
+        xhr.open('post','/user/register',true);
+        var formdata='uname='+uname.value+'&upwd='+upwd1.value+'&email='+email.value+'&phone='+phone.value;
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        xhr.send(formdata);
+    }
+</script>
+</body>
+</html>

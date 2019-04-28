@@ -1,0 +1,54 @@
+#wrapper{
+    width: 1440px;
+}
+#header{
+    height: 108px;
+}
+#header .logo{
+    margin-left: 20px;
+}
+#header h1{
+    font-size: 32px;
+    color:#ff4e20;
+    font-family: "Xingkai SC";
+    display: inline;
+}
+table{
+    margin-top: 20px    ;
+    width: 100%;
+    border:1px solid #faa;
+    border-collapse: collapse;
+}
+th{
+    width: 25%;
+    border:1px solid #aaf;
+    height: 50px;
+    text-align: center;
+}
+td{
+    width: 25%;
+    border:1px solid #aaf;
+    height: 50px;
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    display: block;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    float: right;
+    text-align: center;
+    /*background-image:-webkit-linear-gradient(to top,#ff9569 0%,#e92758 100%);*/
+    /*background-image:-o-linear-gradient(to top,#ff9569 0%,#e92758 100%);*/
+    /*background-image:-moz-linear-gradient(to top,#ff9569 0%,#e92758 100%);*/
+    background-image:linear-gradient(to top,#ff9569 0%,#e92758 100%);
+    color:#fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin:40px
+}
+a:hover{
+    color: red;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/admin_product.css">
+</head>
+<body onload="product_list()">
+<div id="wrapper">
+    <div id="header">
+        <img class="logo" src="img/月亮.png" alt="">
+        <h1>红月游戏交易平台</h1>
+        <a href="http://127.0.0.1:3000/admin_product_add.html">添加商品</a>
+        <a href="http://127.0.0.1:3000/admin_product_query.html">查询商品</a>
+        <hr>
+    </div>
+    <div id="content">
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>商品编号</th>
+                    <th>商品名称</th>
+                    <th>商品价格</th>
+                    <th>商品简介</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="t_product">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function product_list(){
+        //创建异步对象
+        var xhr=new XMLHttpRequest;
+        //绑定监听
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                var list=JSON.parse(result);
+                for(var i=0;i<list.length;i++){
+                    t_product.innerHTML+="<tr><td>"+list[i].pid+"</td><td>"+list[i].pname+"</td><td>"+list[i].price+"</td><td>"+list[i].ptxt+"</td><td><a href='javascript:product_delete("+list[i].pid+")'>删除</a>  <a href='product_update.html?pid="+list[i].pid+"'>修改</a></td></tr>"
+                }
+            }
+        }
+        //打开链接，创建请求
+        xhr.open('get','/admin/product_list',true);
+        //发送请求
+        xhr.send(null);
+    }
+    function product_delete(pid){
+        var msg="确定要删除吗";
+        //创建异步对象
+        //删除确认
+        if(confirm(msg)==true){
+            var xhr=new XMLHttpRequest;
+            //绑定监听
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4&&xhr.status==200){
+                    var result=xhr.responseText;
+                    if(result==1){
+                        alert('删除成功');
+                        location.href='http://127.0.0.1:3000/admin_product.html';
+                    }
+                }
+            }
+            //打开链接，创建请求
+            xhr.open('get',"/admin/product_delete?pid="+pid,true);
+            //发送请求
+            xhr.send(null);
+        }else{
+            return false;
+        }
+    }
+</script>
+</body>
+</html>
