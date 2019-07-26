@@ -14,6 +14,7 @@ router.get('/product_cart',(req,res)=>{
 //删除购物车商品
 router.get('/cart_delete',(req,res)=>{
 	var obj=req.query;
+	var $price=obj.price;
 	console.log($price);
 	pool.query('DELETE FROM rm_cart WHERE price=?',[$price],(err,result)=>{
 		if(err) throw err;
